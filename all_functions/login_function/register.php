@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/login_function/styles/login_style.css">
+    <link rel="stylesheet" href="/all_functions/login_function/styles/login_style.css">
     <title>Register</title>
 </head>
 <body>
@@ -36,7 +36,7 @@
                     <input type="submit" class="btn" name="submit" value="Login" required>
                 </div>
                 <div class="links">
-                    U have account? <a href="login.html">Sign In</a>
+                    U have account? <a href="index.php">Sign In</a>
                 </div>
             </form>
         </div>
