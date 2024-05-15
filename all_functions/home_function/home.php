@@ -1,35 +1,36 @@
-<?php 
+<?php
 session_start();
 
-include("C:/Program Files/xampp/htdocs/ffntions/ffntions/all_functions/database/config.php");
+include ("C:/Program Files/xampp/htdocs/ffntions/ffntions/all_functions/database/config.php");
 
-if(!isset($_SESSION['valid'])){
+if (!isset($_SESSION['valid'])) {
     header("Location: C:/Program Files/xampp/htdocs/ffntions/ffntions/all_functions/login_function/index.php");
-    exit; 
+    exit;
 }
 
 $id = $_SESSION['id'];
 
 $query = mysqli_query($con, "SELECT * FROM users WHERE Id='$id'");
 
-if(!$query) {
+if (!$query) {
     die("Error en la consulta SQL: " . mysqli_error($con));
 }
 
 $res_Uname = $res_Email = $res_Age = $res_Role = "";
 
-if(mysqli_num_rows($query) > 0) {
+if (mysqli_num_rows($query) > 0) {
     $result = mysqli_fetch_assoc($query);
     $res_Uname = $result['Username'];
     $res_Email = $result['Email'];
     $res_Age = $result['Age'];
-    $res_Role = $result['Role']; 
+    $res_Role = $result['Role'];
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,6 +38,7 @@ if(mysqli_num_rows($query) > 0) {
     <link rel="stylesheet" href="/all_functions/login_function/styles/login_style.css">
     <title>Home</title>
 </head>
+
 <body>
     <div class="nav">
         <div class="logo">
@@ -44,16 +46,16 @@ if(mysqli_num_rows($query) > 0) {
         </div>
 
         <div class="right-links">
-            <?php if(!empty($res_Uname)): ?>
+            <?php if (!empty($res_Uname)): ?>
                 <a href='changeprfl.php?Id=<?php echo $id ?>'> <button class="btn">Change Profile</button> </a>
             <?php endif; ?>
 
-            <?php if($res_Role == 1): ?>
+            <?php if ($res_Role == 1): ?>
                 <div class="dropdown">
                     <button class="dropbtn">Manage</button>
                     <div class="dropdown-content">
-                        <a href="Inventory_function/Inventory.php">Inventory</a>
-                        <a href="feedback_function/Feedbacks.php">Feedbacks</a>
+                        <a href="Inventory_function/Inventory.php">Feedbacks</a>
+                        <a href="feedback_function/Feedbacks.php">Inventory</a>
                     </div>
                 </div>
             <?php endif; ?>
@@ -64,33 +66,34 @@ if(mysqli_num_rows($query) > 0) {
 
     <main>
 
-       <div class="main-box top">
-          <div class="top">
-            <div class="box">
-                <?php if(!empty($res_Uname)): ?>
-                    <p>Hello <b><?php echo $res_Uname ?></b>, Welcome</p>
-                <?php endif; ?>
+        <div class="main-box top">
+            <div class="top">
+                <div class="box">
+                    <?php if (!empty($res_Uname)): ?>
+                        <p>Hello <b><?php echo $res_Uname ?></b>, Welcome</p>
+                    <?php endif; ?>
+                </div>
+                <div class="box">
+                    <?php if (!empty($res_Email)): ?>
+                        <p>Your email is <b><?php echo $res_Email ?></b>.</p>
+                    <?php endif; ?>
+                </div>
+                <div class="box">
+                    <?php if (!empty($res_Role)): ?>
+                        <p>Your role is <b><?php echo $res_Role ?></b>.</p>
+                    <?php endif; ?>
+                </div>
             </div>
-            <div class="box">
-                <?php if(!empty($res_Email)): ?>
-                    <p>Your email is <b><?php echo $res_Email ?></b>.</p>
-                <?php endif; ?>
+            <div class="bottom">
+                <div class="box">
+                    <?php if (!empty($res_Age)): ?>
+                        <p>And you are <b><?php echo $res_Age ?> years old</b>.</p>
+                    <?php endif; ?>
+                </div>
             </div>
-            <div class="box">
-                <?php if(!empty($res_Role)): ?>
-                    <p>Your role is <b><?php echo $res_Role ?></b>.</p>
-                <?php endif; ?>
-            </div>
-          </div>
-          <div class="bottom">
-            <div class="box">
-                <?php if(!empty($res_Age)): ?>
-                    <p>And you are <b><?php echo $res_Age ?> years old</b>.</p>
-                <?php endif; ?> 
-            </div>
-          </div>
-       </div>
+        </div>
 
     </main>
 </body>
+
 </html>
