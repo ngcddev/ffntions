@@ -18,12 +18,11 @@
 <body>
     <div class="nav">
         <div class="logo">
-            <p><a href="home.php"> Logo</a></p>
+            <p><a href="home.php"> Ecommerce Shop</a></p>
         </div>
-
         <div class="right-links">
             <a href="#">Change Profile</a>
-            <a href="php/logout.php"> <button class="btn">Log Out</button> </a>
+            <a href="C:/Program Files/xampp/htdocs/ffntions/ffntions/all_functions/database/logout.php"> <button class="btn">Log Out</button> </a>
         </div>
     </div>
     <div class="container">

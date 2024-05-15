@@ -16,13 +16,14 @@ if(!$query) {
     die("Error en la consulta SQL: " . mysqli_error($con));
 }
 
-$res_Uname = $res_Email = $res_Age = "";
+$res_Uname = $res_Email = $res_Age = $res_Role = "";
 
 if(mysqli_num_rows($query) > 0) {
     $result = mysqli_fetch_assoc($query);
     $res_Uname = $result['Username'];
     $res_Email = $result['Email'];
     $res_Age = $result['Age'];
+    $res_Role = $result['Role']; 
 }
 
 ?>
@@ -39,16 +40,20 @@ if(mysqli_num_rows($query) > 0) {
 <body>
     <div class="nav">
         <div class="logo">
-            <p><a href="home.php">Logo</a> </p>
+            <p><a href="home.php">Ecommerce Shop</a> </p>
         </div>
 
         <div class="right-links">
 
             <?php if(!empty($res_Uname)): ?>
-                <a href='edit.php?Id=<?php echo $id ?>'>Change Profile</a>
+                <a href='changeprfl.php?Id=<?php echo $id ?>'>Change Profile</a>
             <?php endif; ?>
 
-            <a href="php/logout.php"> <button class="btn">Log Out</button> </a>
+            <?php if($res_Role == 1): ?>
+                <a href='manage.php'>Manage</a>
+            <?php endif; ?>
+
+            <a href="../../../all_functions/database/logout.php"> <button class="btn">Log Out</button> </a>
 
         </div>
     </div>
@@ -66,6 +71,11 @@ if(mysqli_num_rows($query) > 0) {
  
                 <?php if(!empty($res_Email)): ?>
                     <p>Your email is <b><?php echo $res_Email ?></b>.</p>
+                <?php endif; ?>
+            </div>
+            <div class="box">
+                <?php if(!empty($res_Role)): ?>
+                    <p>Your role is <b><?php echo $res_Role ?></b>.</p>
                 <?php endif; ?>
             </div>
           </div>
