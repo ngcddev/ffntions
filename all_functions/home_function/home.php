@@ -40,35 +40,38 @@ if(mysqli_num_rows($query) > 0) {
 <body>
     <div class="nav">
         <div class="logo">
-            <p><a href="home.php">Ecommerce Shop</a> </p>
+            <p><a href="home.php">Ecommerce Shop</a></p>
         </div>
 
         <div class="right-links">
-
             <?php if(!empty($res_Uname)): ?>
-                <a href='changeprfl.php?Id=<?php echo $id ?>'>Change Profile</a>
+                <a href='changeprfl.php?Id=<?php echo $id ?>'> <button class="btn">Change Profile</button> </a>
             <?php endif; ?>
 
             <?php if($res_Role == 1): ?>
-                <a href='manage.php'>Manage</a>
+                <div class="dropdown">
+                    <button class="dropbtn">Manage</button>
+                    <div class="dropdown-content">
+                        <a href="Inventory_function/Inventory.php">Inventory</a>
+                        <a href="feedback_function/Feedbacks.php">Feedbacks</a>
+                    </div>
+                </div>
             <?php endif; ?>
 
-            <a href="../../../all_functions/database/logout.php"> <button class="btn">Log Out</button> </a>
-
+            <a href="../../../all_functions/database/logout.php"><button class="btn">Log Out</button></a>
         </div>
     </div>
+
     <main>
 
        <div class="main-box top">
           <div class="top">
             <div class="box">
-  
                 <?php if(!empty($res_Uname)): ?>
                     <p>Hello <b><?php echo $res_Uname ?></b>, Welcome</p>
                 <?php endif; ?>
             </div>
             <div class="box">
- 
                 <?php if(!empty($res_Email)): ?>
                     <p>Your email is <b><?php echo $res_Email ?></b>.</p>
                 <?php endif; ?>
@@ -81,7 +84,6 @@ if(mysqli_num_rows($query) > 0) {
           </div>
           <div class="bottom">
             <div class="box">
-
                 <?php if(!empty($res_Age)): ?>
                     <p>And you are <b><?php echo $res_Age ?> years old</b>.</p>
                 <?php endif; ?> 
