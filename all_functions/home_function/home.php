@@ -26,6 +26,24 @@ if (mysqli_num_rows($query) > 0) {
     $res_Role = $result['Role'];
 }
 
+// Procesar el formulario de feedback
+if (isset($_POST['register'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $observation = $_POST['observation'];
+
+    if (empty($name) || empty($email) || empty($observation)) {
+        $message[] = 'Please fill out all fields';
+    } else {
+        $datetime_feedback = date("Y-m-d H:i:s");
+        $insert = "INSERT INTO feedbacks (name_feedback, email_feedback, feedback, datetime_feedback) VALUES ('$name', '$email', '$observation', '$datetime_feedback')";
+        if (mysqli_query($con, $insert)) {
+            $message[] = 'Feedback sent successfully';
+        } else {
+            $message[] = 'Could not send feedback: ' . mysqli_error($con);
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -47,15 +65,15 @@ if (mysqli_num_rows($query) > 0) {
 
         <div class="right-links">
             <?php if (!empty($res_Uname)): ?>
-                <a href='changeprfl.php?Id=<?php echo $id ?>'> <button class="btn">Change Profile</button> </a>
+                <a href='changeprfl.php?Id=<?php echo $id ?>'><button class="btn">Update Profile</button></a>
             <?php endif; ?>
 
             <?php if ($res_Role == 1): ?>
                 <div class="dropdown">
                     <button class="dropbtn">Manage</button>
                     <div class="dropdown-content">
-                        <a href="Inventory_function/Inventory.php">Feedbacks</a>
-                        <a href="feedback_function/Feedbacks.php">Inventory</a>
+                        <a href="Feedbacks_functions/Feedbacks.php">Feedbacks</a>
+                        <a href="Inventory_functions/Inventory.php">Inventory</a>
                     </div>
                 </div>
             <?php endif; ?>
@@ -65,7 +83,6 @@ if (mysqli_num_rows($query) > 0) {
     </div>
 
     <main>
-
         <div class="main-box top">
             <div class="top">
                 <div class="box">
@@ -91,6 +108,19 @@ if (mysqli_num_rows($query) > 0) {
                     <?php endif; ?>
                 </div>
             </div>
+        </div>
+
+        <div class="feedback-container">
+            <h2>Feedback Form</h2>
+            <form method="post">
+                <h3>Send your feedback or observation</h3>
+                <input type="text" name="name" placeholder="Full name" class="input"
+                    value="<?php echo htmlspecialchars($res_Uname); ?>">
+                <input type="email" name="email" placeholder="E-Mail" class="input"
+                    value="<?php echo htmlspecialchars($res_Email); ?>">
+                <input type="text" name="observation" placeholder="Feedback or observation" class="input">
+                <input type="submit" name="register" class="btn submit" value="Send Feedback">
+            </form>
         </div>
 
     </main>

@@ -21,7 +21,7 @@ if(isset($_POST['update_product'])){
 
       if($upload){
          move_uploaded_file($product_image_tmp_name, $product_image_folder);
-         header('location:Feedbacks.php');
+         header('location:Inventory.php');
       }else{
          $$message[] = 'please fill out all!'; 
       }
@@ -67,7 +67,7 @@ if(isset($_POST['update_product'])){
       <input type="number" min="0" class="box" name="product_price" value="<?php echo $row['price']; ?>" placeholder="enter the product price">
       <input type="file" class="box" name="product_image"  accept="image/png, image/jpeg, image/jpg">
       <input type="submit" value="update product" name="update_product" class="btn">
-      <a href="Feedbacks.php" class="btn">go back!</a>
+      <a href="Inventory.php" class="btn">go back!</a>
    </form>
    
 

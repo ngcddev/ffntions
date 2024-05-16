@@ -8,7 +8,7 @@ if (isset($_POST['add_product'])) {
     $product_price = $_POST['product_price'];
     $product_image = $_FILES['product_image']['name'];
     $product_image_tmp_name = $_FILES['product_image']['tmp_name'];
-    $product_image_folder = '../../home_function/feedback_function/uploaded_img/' . $product_image;
+    $product_image_folder = '../../home_function/inventory_functions/uploaded_img/' . $product_image;
 
 
     if (empty($product_name) || empty($product_price) || empty($product_image)) {
@@ -30,7 +30,7 @@ if (isset($_POST['add_product'])) {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     mysqli_query($con, "DELETE FROM products WHERE id = $id");
-    header('location:Feedbacks.php');
+    header('location:Inventory.php');
 }
 ;
 
@@ -44,7 +44,7 @@ if (isset($_GET['delete'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedbacks</title>
+    <title>Inventory</title>
     <link rel="stylesheet" href="/all_functions/home_function/stylefunctions.css">
 
 </head>
@@ -52,8 +52,8 @@ if (isset($_GET['delete'])) {
 <body>
 
     <div class="nav-fd">
-        <div class="logo-fd a">
-            <p><a href="../home.php" style="color:black">Ecommerce Shop</a></p>
+        <div class="logo-fd">
+            <p><a href="../home.php">Ecommerce Shop</a></p>
         </div>
 
         <div class="right-links-fd">
@@ -102,14 +102,14 @@ if (isset($_GET['delete'])) {
                 </thead>
                 <?php while ($row = mysqli_fetch_assoc($select)) { ?>
                     <tr>
-                        <td><img src="../../home_function/feedback_function/uploaded_img/<?php echo $row['image']; ?>"
+                        <td><img src="../../home_function/inventory_functions/uploaded_img/<?php echo $row['image']; ?>"
                                 height="100" alt=""></td>
                         <td><?php echo $row['name']; ?></td>
                         <td>$<?php echo $row['price']; ?></td>
                         <td>
-                            <a href="Feedbacks_update.php?edit=<?php echo $row['id']; ?>" class="btn"> <i
+                            <a href="Inventory_update.php?edit=<?php echo $row['id']; ?>" class="btn"> <i
                                     class="fas fa-edit"></i> edit </a>
-                            <a href="Feedbacks.php?delete=<?php echo $row['id']; ?>" class="btn"> <i
+                            <a href="Inventory.php?delete=<?php echo $row['id']; ?>" class="btn"> <i
                                     class="fas fa-trash"></i> delete </a>
                         </td>
                     </tr>
